@@ -2,7 +2,7 @@
 resource "aws_ssm_parameter" "database_name" {
   name  = "DB_NAME"
   type  = "String"
-  value = var.database.name
+  value = var.database.db_name
 }
 
 resource "aws_ssm_parameter" "database_username" {
@@ -30,9 +30,16 @@ resource "aws_ssm_parameter" "session_key_name" {
   value = var.session.key_name
 }
 
-# S3
-resource "aws_ssm_parameter" "s3_bucket" {
-  name  = "S3_BUCKET_NAME"
+# S3 original image
+resource "aws_ssm_parameter" "s3_bucket_original" {
+  name  = "S3_BUCKET_NAME_ORIGINAL"
   type  = "String"
-  value = var.s3.bucket_name
+  value = var.s3_original.bucket_name
+}
+
+# S3 thumbnail image
+resource "aws_ssm_parameter" "s3_bucket_thumbnail" {
+  name  = "S3_BUCKET_NAME_THUMBNAIL"
+  type  = "String"
+  value = var.s3_thumbnail.bucket_name
 }

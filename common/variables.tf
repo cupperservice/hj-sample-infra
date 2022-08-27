@@ -23,9 +23,12 @@ variable "database" {
   type = map(any)
 
   default = {
-    name = ""
-    username = ""
-    password = ""
+    db_name         = ""
+    username        = ""
+    password        = ""
+    engine          = ""
+    engine_version  = ""
+    instance_class  = ""
   }
 }
 
@@ -51,5 +54,17 @@ variable "s3_thumbnail" {
 
   default = {
     bucket_name = ""
+  }
+}
+
+variable "app" {
+  type = map(any)
+
+  default = {
+    image_id      = ""
+    instance_type = ""
+    key_name      = ""
+    max_size      = 2
+    min_size      = 1
   }
 }

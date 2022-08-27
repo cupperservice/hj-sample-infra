@@ -8,7 +8,7 @@ resource "aws_alb" "alb" {
 
 resource "aws_alb_target_group" "alb" {
   name     = "your-tg"
-  port     = 80
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.main.id}"
   target_type = "ip"
