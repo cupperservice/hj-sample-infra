@@ -24,6 +24,11 @@
     terraform apply
     ```
 
+5. rdsのエンドポイントを登録する  
+    1. `staging/main.tf` の `database/host` に作成したrdsのエンドポイントを設定する
+    2. 適用する  
+    `terraform apply`
+
 # bastionサーバの構築
 [Cloud9からbastionサーバにssh接続する](#how-to-ssh-login)
 
@@ -124,8 +129,13 @@ bastionサーバからtemplateサーバにssh接続する
 6. イメージ作成  
   templateサーバのイメージを作成する
 
-# イメージの
-
+# アプリケーションサーバを立ち上げる
+1. `staging/main.tf` の以下を編集する
+    * `app/image_if` -> 作成したイメージのID
+    * `app/max_size` -> 1
+    * `app/min_size` -> 1
+2. 適用する  
+  `terraform apply`
 
 # <a id="how-to-ssh-login">Cloud9からbastionサーバにsshログインする</a>
 1. 秘密鍵(labsuser.pem)をCloud9上にコピー
