@@ -15,12 +15,19 @@ resource "aws_instance" "bastion" {
   #!/bin/bash
   yum update -y
   yum install -y git
+  sudo yum remove -y mariadb-libs
+  sudo yum localinstall -y https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+  sudo yum-config-manager --disable mysql57-community
+  sudo yum-config-manager --enable mysql80-community
+  sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+  sudo yum install -y mysql-community-client
   EOF
 }
 
 resource "aws_instance" "template" {
   ami = "${var.template.image_id}"
   instance_type = "t2.micro"
+  iam_instance_profile = "EMR_EC2_DefaultRole"
   key_name = "${var.template.key_name}"
   subnet_id =  aws_subnet.your-sub-pri1.id
   associate_public_ip_address = "true"
@@ -33,5 +40,7 @@ resource "aws_instance" "template" {
   user_data = <<EOF
   #!/bin/bash
   yum update -y
+  curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
+  yum install -y --enablerepo=nodesource nodejs
   EOF
 }

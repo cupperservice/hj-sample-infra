@@ -5,6 +5,18 @@ resource "aws_ssm_parameter" "database_name" {
   value = var.database.db_name
 }
 
+resource "aws_ssm_parameter" "database_host" {
+  name  = "DB_HOST"
+  type  = "String"
+  value = var.database.host
+}
+
+resource "aws_ssm_parameter" "database_port" {
+  name  = "DB_PORT"
+  type  = "String"
+  value = var.database.port
+}
+
 resource "aws_ssm_parameter" "database_username" {
   name  = "DB_USERNAME"
   type  = "String"
