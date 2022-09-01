@@ -23,6 +23,8 @@ variable "database" {
   type = map(any)
 
   default = {
+    host            = ""
+    port            = ""
     db_name         = ""
     username        = ""
     password        = ""

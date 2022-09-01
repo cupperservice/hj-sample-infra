@@ -258,3 +258,15 @@ resource "aws_security_group_rule" "db" {
   source_security_group_id = aws_security_group.app.id
 }
 
+
+resource "aws_security_group_rule" "db_from_template" {
+  security_group_id = aws_security_group.db.id
+
+  type = "ingress"
+
+  from_port = 3306
+  to_port = 3306
+  protocol = "tcp"
+
+  source_security_group_id = aws_security_group.template.id
+}
