@@ -12,16 +12,16 @@ resource "aws_instance" "bastion" {
     Name = "bastion"
   }
   user_data = <<EOF
-  #!/bin/bash
-  yum update -y
-  yum install -y git
-  sudo yum remove -y mariadb-libs
-  sudo yum localinstall -y https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-  sudo yum-config-manager --disable mysql57-community
-  sudo yum-config-manager --enable mysql80-community
-  sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-  sudo yum install -y mysql-community-client
-  EOF
+#!/bin/bash
+yum update -y
+yum install -y git
+sudo yum remove -y mariadb-libs
+sudo yum localinstall -y https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+sudo yum-config-manager --disable mysql57-community
+sudo yum-config-manager --enable mysql80-community
+sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+sudo yum install -y mysql-community-client
+EOF
 }
 
 resource "aws_instance" "template" {
@@ -38,9 +38,30 @@ resource "aws_instance" "template" {
     Name = "template"
   }
   user_data = <<EOF
-  #!/bin/bash
-  yum update -y
-  curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
-  yum install -y --enablerepo=nodesource nodejs
-  EOF
+#!/bin/bash
+yum update -y
+curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
+yum install -y --enablerepo=nodesource nodejs
+cat > "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json" <<EOF2
+{
+  "agent": {
+    "run_as_user": "root"
+  },
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/home/ec2-user/my-app/logs/application.log",
+            "log_group_name": "hj-sample-app/application.log",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 1
+          }
+        ]
+      }
+    }
+  }
+}
+EOF2
+EOF
 }
