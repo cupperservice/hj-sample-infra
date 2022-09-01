@@ -43,7 +43,7 @@ yum update -y
 curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
 yum install -y --enablerepo=nodesource nodejs
 yum install -y amazon-cloudwatch-agent
-cat > "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json" <<EOF2
+cat > "/opt/aws/amazon-cloudwatch-agent/bin/config.json" <<EOF2
 {
   "agent": {
     "run_as_user": "root"
@@ -64,5 +64,7 @@ cat > "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json" <<EOF2
   }
 }
 EOF2
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file://opt/aws/amazon-cloudwatch-agent/bin/config.json
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a start
 EOF
 }
