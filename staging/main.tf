@@ -16,7 +16,7 @@ module "common" {
     key_name = "vockey"
   }
   database = {
-    host            = ""
+    host            = "localhost"
     port            = "3306"
     db_name         = "mydb"
     username        = "hamajoadmin"

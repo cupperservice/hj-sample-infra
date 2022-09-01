@@ -42,6 +42,7 @@ resource "aws_instance" "template" {
 yum update -y
 curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
 yum install -y --enablerepo=nodesource nodejs
+yum install -y amazon-cloudwatch-agent
 cat > "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json" <<EOF2
 {
   "agent": {
