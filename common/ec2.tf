@@ -52,7 +52,7 @@ cat > "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json" <<EOF2
       "files": {
         "collect_list": [
           {
-            "file_path": "/home/ec2-user/my-app/logs/application.log",
+            "file_path": "/opt/appsvr/logs/application.log",
             "log_group_name": "hj-sample-app/application.log",
             "log_stream_name": "{instance_id}",
             "retention_in_days": 1
