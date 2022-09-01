@@ -16,6 +16,8 @@ module "common" {
     key_name = "vockey"
   }
   database = {
+    host            = ""
+    post            = "3306"
     db_name         = "mydb"
     username        = "hamajoadmin"
     password        = "hamajoadmin00"
