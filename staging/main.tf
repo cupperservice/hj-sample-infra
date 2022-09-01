@@ -17,7 +17,7 @@ module "common" {
   }
   database = {
     host            = ""
-    post            = "3306"
+    port            = "3306"
     db_name         = "mydb"
     username        = "hamajoadmin"
     password        = "hamajoadmin00"
