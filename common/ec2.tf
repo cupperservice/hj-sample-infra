@@ -57,6 +57,12 @@ cat > "/opt/aws/amazon-cloudwatch-agent/bin/config.json" <<EOF2
             "log_group_name": "hj-sample-app/application.log",
             "log_stream_name": "{instance_id}",
             "retention_in_days": 1
+          },
+          {
+            "file_path": "/opt/appsvr/logs/access.log",
+            "log_group_name": "hj-sample-app/access.log",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 1
           }
         ]
       }
@@ -66,5 +72,6 @@ cat > "/opt/aws/amazon-cloudwatch-agent/bin/config.json" <<EOF2
 EOF2
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file://opt/aws/amazon-cloudwatch-agent/bin/config.json
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a start
+mkdir /opt/appsvr
 EOF
 }
