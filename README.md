@@ -35,10 +35,7 @@
 1. 以下のリポジトリをcloneする  
 `git clone https://github.com/cupperservice/hj-sample-app.git`
 
-2. templateサーバ上にアプリを保管するディレクトリを作成する
-`ssh ec2-user@templateサーバのPrivate IPアドレス 'sudo mkdir /opt/appsvr && sudo chown ec2-user /opt/appsvr'`
-
-3. templateサーバにリソースをコピーする  
+2. templateサーバにリソースをコピーする  
 `rsync -tav hj-sample-app/ ec2-user@TemplateサーバのPrivate IPアドレス:/opt/appsvr/`
 
 # テーブルの作成
