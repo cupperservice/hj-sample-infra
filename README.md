@@ -144,7 +144,7 @@ bastionサーバからtemplateサーバにssh接続する
 `eval $(ssh-agent)`
 
 4. ssh agent に鍵を登録する  
-`ssh-add -K labsuser.pem`
+`ssh-add labsuser.pem`
 
 5. ssh接続  
 `ssh -A ec2-user@bastionサーバのPublic IPアドレス`
