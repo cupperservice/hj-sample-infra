@@ -117,10 +117,12 @@ bastionサーバからtemplateサーバにssh接続する
 
 5. 起動スクリプトの作成
     1. `scripts/app.service` を `/etc/systemd/system/app.service` にコピーする
-    2. 起動  
+    2. 定義をリロードする  
+    `sudo systemctl daemon-reload`
+    3. 起動  
     `sudo systemctl start app`
-    3. ブラウザからtemplateサーバの8080ポートにアクセスして動作することを確認する
-    4. 自動起動設定  
+    4. ブラウザからtemplateサーバの8080ポートにアクセスして動作することを確認する
+    5. 自動起動設定  
     `sudo systemctl enable app`
 
 6. イメージ作成  
@@ -134,6 +136,10 @@ bastionサーバからtemplateサーバにssh接続する
 2. 適用する  
   `terraform apply`
 
+# 動作確認
+WebブラウザからLoad BalancerのDNS nameにアクセスしてアプリケーションが正常に動作していることを確認する
+
+---
 # <a id="how-to-ssh-login">Cloud9からbastionサーバにsshログインする</a>
 1. 秘密鍵(labsuser.pem)をCloud9上にコピー
 

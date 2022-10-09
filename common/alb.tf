@@ -7,7 +7,7 @@ resource "aws_alb" "alb" {
 }
 
 resource "aws_alb_target_group" "alb" {
-  name     = "your-tg"
+  name     = "your-tg-${substr(uuid(), 0, 6)}"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.main.id}"
@@ -21,6 +21,11 @@ resource "aws_alb_target_group" "alb" {
     timeout             = 5
     unhealthy_threshold = 2
     matcher             = 200
+  }
+
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes = [name]
   }
 }
 
