@@ -11,7 +11,7 @@ resource "aws_alb_target_group" "alb" {
   port     = 8080
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.main.id}"
-  target_type = "ip"
+  target_type = "instance"
 
   health_check {
     interval            = 30
