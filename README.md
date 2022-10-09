@@ -29,18 +29,18 @@
     2. 適用する  
     `terraform apply`
 
-# bastionサーバの構築
+# アプリケーションをTemplateサーバにコピーする
 [Cloud9からbastionサーバにssh接続する](#how-to-ssh-login)
 
 1. 以下のリポジトリをcloneする  
 `git clone https://github.com/cupperservice/hj-sample-app.git`
 
-2. templateサーバにリソースをコピーする  
+2. Templateサーバにリソースをコピーする  
 `rsync -tav hj-sample-app/ ec2-user@TemplateサーバのPrivate IPアドレス:/opt/appsvr/`
 
 # テーブルの作成
 bastionサーバで作業する
-1. templateサーバにSSHトンネリングを確立する
+1. TemplateサーバにSSHトンネリングを確立する
 `ssh -L 3306:RDSのエンドポイント:3306 ec2-user@templateサーバのPrivate IPアドレス`
 
 2. RDSに接続する
@@ -65,8 +65,8 @@ CREATE TABLE image (
 );
 ```
 
-# templateサーバの構築
-bastionサーバからtemplateサーバにssh接続する  
+# Templateサーバの構築
+bastionサーバからTemplateサーバにssh接続する  
 `ssh ec2-user@templateサーバのPrivate IPアドレス`
 
 1. regionを設定する
@@ -130,7 +130,7 @@ bastionサーバからtemplateサーバにssh接続する
 
 # アプリケーションサーバを立ち上げる
 1. `staging/main.tf` の以下を編集する
-    * `app/image_if` -> 作成したイメージのID
+    * `app/image_id` -> 6.で作成したイメージのID
     * `app/max_size` -> 1
     * `app/min_size` -> 1
 2. 適用する  
