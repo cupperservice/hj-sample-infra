@@ -13,7 +13,8 @@
     +-- staging  -> parameters for staging environment
     ```
 
-3. 各種パラメータの設定
+3. 各種パラメータの設定  
+以下のファイルの `XXXXX` の部分を環境に合わせて変更する
     * ファイル：`hj-sample-infra/staging/main.tf`
 
 4. terraformを実行  

@@ -1,44 +1,45 @@
 terraform {
-  required_version = "= 1.2.8"
+  required_version = "= 1.2.9"
 }
 
 module "common" {
   source = "../common"
-  region = "us-east-1"
-  az1 = "us-east-1a"
-  az2 = "us-east-1c"
+  region = "XXXXX"
+  az1 = "XXXXX"
+  az2 = "XXXXX"
   bastion = {
-    image_id = "ami-090fa75af13c156b4"
-    key_name = "vockey"
+    image_id = "XXXXX"
+    key_name = "XXXXX"
   }
   template = {
-    image_id = "ami-090fa75af13c156b4"
-    key_name = "vockey"
+    image_id = "XXXXX"
+    key_name = "XXXXX"
   }
   database = {
-    host            = "localhost"
-    port            = "3306"
-    db_name         = "mydb"
-    username        = "hamajoadmin"
-    password        = "hamajoadmin00"
-    engine          = "mysql"
-    engine_version  = "5.7.37"
-    instance_class  = "db.t3.small"
+    host              = "localhost"
+    port              = "3306"
+    db_name           = "mydb"
+    username          = "XXXXX"
+    password          = "XXXXX"
+    engine            = "aurora-mysql"
+    engine_version    = "5.7.mysql_aurora.2.11.0"
+    instance_class    = "db.t3.small"
+    num_of_instances  = "2"
   }
   session = {
     table_name = "session-table"
     key_name = "sessionId"
   }
   s3_original = {
-    bucket_name = "hj-202208-image-original"
+    bucket_name = "XXXXX"
   }
   s3_thumbnail = {
-    bucket_name = "hj-202208-image-thumbnail"
+    bucket_name = "XXXXX"
   }
   app = {
-    image_id = "ami-090fa75af13c156b4"
+    image_id = "XXXXX"
     instance_type = "t2.small"
-    key_name = "vockey"
+    key_name = "XXXXX"
     max_size = 0
     min_size = 0
   }
