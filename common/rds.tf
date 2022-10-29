@@ -49,6 +49,8 @@ resource "aws_rds_cluster_instance" "hj-db-instance" {
 
   db_subnet_group_name    = aws_db_subnet_group.hj-db-subnet-group.name
   db_parameter_group_name = aws_db_parameter_group.hj-db-parameter-group.name
+
+  monitoring_interval     = 0
 }
 
 resource "aws_db_parameter_group" "hj-db-parameter-group" {
