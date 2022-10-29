@@ -23,14 +23,15 @@ variable "database" {
   type = map(any)
 
   default = {
-    host            = ""
-    port            = ""
-    db_name         = ""
-    username        = ""
-    password        = ""
-    engine          = ""
-    engine_version  = ""
-    instance_class  = ""
+    host              = ""
+    port              = ""
+    db_name           = ""
+    username          = ""
+    password          = ""
+    engine            = ""
+    engine_version    = ""
+    instance_class    = ""
+    num_of_instances  = ""
   }
 }
 
