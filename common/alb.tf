@@ -1,7 +1,7 @@
 resource "aws_alb" "alb" {
   name                       = "your-alb"
   security_groups            = ["${aws_security_group.web.id}"]
-  subnets                    = ["${aws_subnet.your-sub-pri1.id}", "${aws_subnet.your-sub-pri2.id}"]
+  subnets                    = ["${aws_subnet.your-sub-pub1.id}", "${aws_subnet.your-sub-pub2.id}"]
   internal                   = false
   enable_deletion_protection = false
 }
