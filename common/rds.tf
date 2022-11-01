@@ -38,19 +38,20 @@ resource "aws_rds_cluster_parameter_group" "hj-db-cluster-parameter-group" {
 }
 
 resource "aws_rds_cluster_instance" "hj-db-instance" {
-  count                   = "${var.database.num_of_instances}"
-  identifier              = "hj-db-instance-${count.index}"
-  cluster_identifier      = aws_rds_cluster.hj-db-cluster.id
+  count                         = "${var.database.num_of_instances}"
+  identifier                    = "hj-db-instance-${count.index}"
+  cluster_identifier            = aws_rds_cluster.hj-db-cluster.id
 
-  engine                  = aws_rds_cluster.hj-db-cluster.engine
-  engine_version          = aws_rds_cluster.hj-db-cluster.engine_version
+  engine                        = aws_rds_cluster.hj-db-cluster.engine
+  engine_version                = aws_rds_cluster.hj-db-cluster.engine_version
 
-  instance_class          = "${var.database.instance_class}"
+  instance_class                = "${var.database.instance_class}"
 
-  db_subnet_group_name    = aws_db_subnet_group.hj-db-subnet-group.name
-  db_parameter_group_name = aws_db_parameter_group.hj-db-parameter-group.name
+  db_subnet_group_name          = aws_db_subnet_group.hj-db-subnet-group.name
+  db_parameter_group_name       = aws_db_parameter_group.hj-db-parameter-group.name
 
-  monitoring_interval     = 0
+  monitoring_interval           = 0
+  performance_insights_enabled  = false
 }
 
 resource "aws_db_parameter_group" "hj-db-parameter-group" {

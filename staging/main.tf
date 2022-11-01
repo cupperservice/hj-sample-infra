@@ -24,7 +24,7 @@ module "common" {
     engine            = "aurora-mysql"
     engine_version    = "5.7.mysql_aurora.2.11.0"
     instance_class    = "db.t3.small"
-    num_of_instances  = "2"
+    num_of_instances  = "0"
   }
   session = {
     table_name = "session-table"
