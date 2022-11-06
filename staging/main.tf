@@ -43,4 +43,9 @@ module "common" {
     max_size = 0
     min_size = 0
   }
+  lambda = {
+    function_file = "../lambda/thumbnail.zip"
+    layer_file    = "../lambda/sharp.zip"
+    role          = "XXXXX"
+  }
 }
