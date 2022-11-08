@@ -80,7 +80,7 @@ bastionサーバからTemplateサーバにssh接続する
     `Default region name` 以外は空 Enter
 
 2. アプリケーションの初期化  
-以下のコマンドを `/opt/appsvt` の下で実行する  
+以下のコマンドを `/opt/appsvr` の下で実行する  
 `npm install`
 
 2. 環境変数の設定  
