@@ -1,6 +1,17 @@
 # System structure
 ![](./img/System.png)
 
+# IAM Roleを編集する
+EMR_EC2_DefaultRoleに以下のポリシーを追加する
+
+* AmazonS3FullAccess
+* AmazonElasticMapReduceforEC2Role
+* CloudWatchAgentServerPolicy 
+* CloudWatchFullAccess
+* AmazonDynamoDBFullAccess
+* CloudWatchLogsFullAccess
+* AmazonSSMFullAccess
+
 # インフラの構築
 1. Cloud 9を立ち上げる
 
@@ -80,7 +91,7 @@ bastionサーバからTemplateサーバにssh接続する
     `Default region name` 以外は空 Enter
 
 2. アプリケーションの初期化  
-以下のコマンドを `/opt/appsvt` の下で実行する  
+以下のコマンドを `/opt/appsvr` の下で実行する  
 `npm install`
 
 2. 環境変数の設定  
