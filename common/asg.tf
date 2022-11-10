@@ -3,9 +3,6 @@ resource "aws_launch_template" "hj-sample-template" {
   image_id    = var.app.image_id
   instance_type = var.app.instance_type
   key_name = var.app.key_name
-  vpc_security_group_ids = [
-    aws_security_group.app.id
-  ]
 
   iam_instance_profile {
     name = "EMR_EC2_DefaultRole"
@@ -17,6 +14,10 @@ resource "aws_launch_template" "hj-sample-template" {
     tags = {
       Name = "app-asg"
     }
+  }
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups = [aws_security_group.app.id]
   }
 }
 
@@ -36,5 +37,5 @@ resource "aws_autoscaling_group" "hj-sample" {
 
 resource "aws_autoscaling_attachment" "asg_attachment_bar" {
   autoscaling_group_name  = aws_autoscaling_group.hj-sample.id
-  alb_target_group_arn    = aws_alb_target_group.alb.arn
+  lb_target_group_arn    = aws_alb_target_group.alb.arn
 }
