@@ -71,3 +71,13 @@ variable "app" {
     min_size      = 1
   }
 }
+
+variable "lambda" {
+  type = map(any)
+
+  default = {
+    function_file = ""
+    layer_file    = ""
+    role          = ""
+  }
+}
