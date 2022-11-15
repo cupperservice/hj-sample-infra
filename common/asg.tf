@@ -33,9 +33,5 @@ resource "aws_autoscaling_group" "hj-sample" {
     id      = aws_launch_template.hj-sample-template.id
     version = "$Latest"
   }
-}
-
-resource "aws_autoscaling_attachment" "asg_attachment_bar" {
-  autoscaling_group_name  = aws_autoscaling_group.hj-sample.id
-  lb_target_group_arn    = aws_alb_target_group.alb.arn
+  target_group_arns = [aws_alb_target_group.alb.arn]
 }
