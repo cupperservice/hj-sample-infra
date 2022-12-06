@@ -1,16 +1,16 @@
 # System structure
 ![](./img/System.png)
 
-# IAM Roleを編集する
-EMR_EC2_DefaultRoleに以下のポリシーを追加する
+~~# IAM Roleを編集する~~  
+~~EMR_EC2_DefaultRoleに以下のポリシーを追加する~~
 
-* AmazonS3FullAccess
-* AmazonElasticMapReduceforEC2Role
-* CloudWatchAgentServerPolicy 
-* CloudWatchFullAccess
-* AmazonDynamoDBFullAccess
-* CloudWatchLogsFullAccess
-* AmazonSSMFullAccess
+~~* AmazonS3FullAccess~~  
+~~* AmazonElasticMapReduceforEC2Role~~  
+~~* CloudWatchAgentServerPolicy~~  
+~~* CloudWatchFullAccess~~  
+~~* AmazonDynamoDBFullAccess~~  
+~~* CloudWatchLogsFullAccess~~  
+~~* AmazonSSMFullAccess~~
 
 # インフラの構築
 1. Cloud 9を立ち上げる
