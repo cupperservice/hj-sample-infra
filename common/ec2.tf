@@ -27,7 +27,7 @@ EOF
 resource "aws_instance" "template" {
   ami = "${var.template.image_id}"
   instance_type = "t2.micro"
-  iam_instance_profile = "EMR_EC2_DefaultRole"
+  iam_instance_profile = "LabInstanceProfile"
   key_name = "${var.template.key_name}"
   subnet_id =  aws_subnet.your-sub-pri1.id
   associate_public_ip_address = "true"

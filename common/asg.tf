@@ -5,7 +5,7 @@ resource "aws_launch_template" "hj-sample-template" {
   key_name = var.app.key_name
 
   iam_instance_profile {
-    name = "EMR_EC2_DefaultRole"
+    name = "LabInstanceProfile"
   }
 
   tag_specifications {
