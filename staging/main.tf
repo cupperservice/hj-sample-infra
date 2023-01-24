@@ -16,7 +16,7 @@ module "common" {
     key_name = "XXXXX"  // キーペア
   }
   database = {
-    host              = "localhost"
+    host              = "localhost"   // RDS 作成完了後に Writer instance のEndpoint を設定する
     port              = "3306"
     db_name           = "mydb"
     username          = "XXXXX" // RDS のマスターユーザー名（値は自分で決める）
@@ -24,7 +24,7 @@ module "common" {
     engine            = "aurora-mysql"
     engine_version    = "5.7.mysql_aurora.2.11.0"
     instance_class    = "db.t3.small"
-    num_of_instances  = "1"
+    num_of_instances  = "0"
   }
   session = {
     table_name = "session-table"

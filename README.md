@@ -36,48 +36,27 @@
     terraform apply
     ```
 
-5. rdsのエンドポイントを登録する  
-    1. `staging/main.tf` の `database/host` に作成したrdsのエンドポイントを設定する
-    2. 適用する  
-    `terraform apply`
+5. RDS のインスタンスを作成  
+    1. `staging/main.tf` の `database/num_of_instances` を `1` に変更
+    2. `terraform apply`
 
-# アプリケーションをTemplateサーバにコピーする
+6. RDS のエンドポイントを登録  
+    1. `staging/main.tf` の `database/host` に作成した RDS のエンドポイントを設定する
+    2. `terraform apply`
+
+# アプリケーションをTemplateサーバにコピーする (bastion サーバで作業する)
 [Cloud9からbastionサーバにssh接続する](#how-to-ssh-login)
 
 1. 以下のリポジトリをcloneする  
 `git clone https://github.com/cupperservice/hj-sample-app.git`
 
 2. Templateサーバにリソースをコピーする  
-`rsync -tav hj-sample-app/ ec2-user@TemplateサーバのPrivate IPアドレス:/opt/appsvr/`
-
-# テーブルの作成
-bastionサーバで作業する
-1. TemplateサーバにSSHトンネリングを確立する
-`ssh -L 3306:RDSのエンドポイント:3306 ec2-user@templateサーバのPrivate IPアドレス`
-
-2. RDSに接続する
-`mysql -uユーザID -pパスワード -h127.0.0.1 mydb`
-
-3. 以下のSQLを実行する
 ```
-CREATE TABLE user (
-  id          INTEGER      AUTO_INCREMENT,
-  user_id     VARCHAR(50)  NOT NULL UNIQUE,
-  password    VARCHAR(100) NOT NULL,
-  name        VARCHAR(100) NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE image (
-  id          INT          NOT NULL AUTO_INCREMENT,
-  name        VARCHAR(100) NOT NULL UNIQUE,
-  size        INT          NOT NULL,
-  comment     VARCHAR(100) NOT NULL,
-  PRIMARY KEY (id)
-);
+TEMP_ID=TemplateサーバのPrivate IPアドレス
+rsync -tav hj-sample-app/ ec2-user@$TEMP_IP:/opt/appsvr/
 ```
 
-# Templateサーバの構築
+# Templateサーバの構築 (Template サーバで作業する)
 bastionサーバからTemplateサーバにssh接続する  
 `ssh ec2-user@templateサーバのPrivate IPアドレス`
 
@@ -104,10 +83,6 @@ bastionサーバからTemplateサーバにssh接続する
     |DB_NAME                  |main.tfの定義値|
     |DB_USERNAME              |main.tfの定義値|
     |DB_PASSWORD              |main.tfの定義値|
-    |S3_BUCKET_NAME_ORIGINAL  |main.tfの定義値|
-    |S3_BUCKET_NAME_THUMBNAIL |main.tfの定義値|
-    |SESSION_KEY_NAME         |main.tfの定義値|
-    |SESSION_TABLE_NAME       |main.tfの定義値|
 
     __#####################################__  
     環境変数の設定方法  
@@ -121,19 +96,16 @@ bastionサーバからTemplateサーバにssh接続する
     `tool`の下で以下を実行する  
     `node add_user.js user.csv`
 
-4. 疎通確認
-    1. アプリケーションサーバを起動  
-    `npm run start`
-    2. 一時的に外部からアクセスできるようにtemplateサーバのSecurity Groupの8080ポートを設定する
-    3. ブラウザからtemplateサーバの8080ポートにアクセスして動作することを確認する
-
-5. 起動スクリプトの作成
-    1. `scripts/app.service` を `/etc/systemd/system/app.service` にコピーする
+4. 起動スクリプトの作成
+    1. `scripts/app.service` を `/etc/systemd/system/app.service` にコピーする  
+    以下を `/opt/appsvr` の下で実行する  
+    `sudo cp scripts/app.service /etc/systemd/system/app.service`
     2. 定義をリロードする  
     `sudo systemctl daemon-reload`
     3. 起動  
     `sudo systemctl start app`
-    4. ブラウザからtemplateサーバの8080ポートにアクセスして動作することを確認する
+    4. ブラウザからtemplateサーバの8080ポートにアクセスして動作することを確認する  
+    __インターネットからアクセスできるように template サーバのセキュリティグループを編集すること__
     5. 自動起動設定  
     `sudo systemctl enable app`
 
