@@ -52,7 +52,7 @@
 
 2. Templateサーバにリソースをコピーする  
 ```
-TEMP_ID=TemplateサーバのPrivate IPアドレス
+TEMP_IP=TemplateサーバのPrivate IPアドレス
 rsync -tav hj-sample-app/ ec2-user@$TEMP_IP:/opt/appsvr/
 ```
 
